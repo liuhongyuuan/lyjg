@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>价格情况分析 - 在线粮油价格统计</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/price-analysis.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- 加载示例数据 -->
+    <script src="sample_data/demo_data.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>价格情况分析</h1>
+            <nav>
+                <a href="index.html">首页</a>
+                <a href="data-management.html">数据录入</a>
+                <a href="price-analysis.html" class="active">价格情况分析</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- 控制面板 -->
+            <section class="control-panel">
+                <div class="form-group">
+                    <label>时间范围</label>
+                    <div style="display: flex; gap: 1rem;">
+                        <select id="startYear" style="flex: 1;">
+                            <option value="">起始年份</option>
+                        </select>
+                        <select id="endYear" style="flex: 1;">
+                            <option value="">结束年份</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>区县</label>
+                    <select id="district" multiple>
+                        <!-- 选项将通过JavaScript动态生成 -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>类别</label>
+                    <select id="category" multiple>
+                        <!-- 选项将通过JavaScript动态生成 -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>图表类型</label>
+                    <select id="chartType">
+                        <option value="line">折线图</option>
+                        <option value="bar">柱状图</option>
+                        <option value="area">面积图</option>
+                    </select>
+                </div>
+                <div class="control-buttons">
+                    <button id="updateBtn" class="update-btn">更新分析</button>
+                    <button id="downloadBtn" class="download-btn">下载图表</button>
+                    <button id="loadDemoDataBtn" class="demo-data-btn" title="加载演示数据">
+                        <i class="fas fa-database"></i> 加载演示数据
+                    </button>
+                </div>
+            </section>
+
+            <!-- 统计数据 -->
+            <section class="analysis-container">
+                <div class="stats-card">
+                    <h3>最高价格</h3>
+                    <div class="stats-value"></div>
+                    <div class="stats-detail"></div>
+                </div>
+                <div class="stats-card">
+                    <h3>最低价格</h3>
+                    <div class="stats-value"></div>
+                    <div class="stats-detail"></div>
+                </div>
+                <div class="stats-card">
+                    <h3>平均价格</h3>
+                    <div class="stats-value"></div>
+                    <div class="stats-detail"></div>
+                </div>
+                <div class="stats-card">
+                    <h3>价格波动</h3>
+                    <div class="stats-value"></div>
+                    <div class="stats-detail"></div>
+                </div>
+            </section>
+
+            <!-- 图表区域 -->
+            <section class="chart-section">
+                <h2>价格趋势分析</h2>
+                <div class="chart-container">
+                    <canvas id="analysisChart"></canvas>
+                </div>
+            </section>
+
+            <!-- 对比表格 -->
+            <section class="chart-section">
+                <h2>价格对比分析</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>类别/地区</th>
+                            <th>最低价格</th>
+                            <th>最高价格</th>
+                            <th>平均价格</th>
+                            <th>波动率</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comparisonTableBody"></tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+
+    <!-- 通知组件 -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <!-- 加载核心JS文件 -->
+    <script src="js/price-analysis.js"></script>
+    <!-- 演示数据加载 -->
+    <script>
+        // 加载演示数据按钮事件
+        document.getElementById('loadDemoDataBtn').addEventListener('click', function() {
+            const count = loadDemoData();
+            
+            // 显示通知
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = `
+                <h4>演示数据加载成功</h4>
+                <p>已加载 ${count} 条粮油价格数据</p>
+            `;
+            const container = document.getElementById('notificationContainer');
+            container.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+            
+            // 重新初始化页面
+            window.location.reload();
+        });
+    </script>
+</body>
+</html> 

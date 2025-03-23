@@ -1,0 +1,314 @@
+/* 价格分析页面样式 */
+.analysis-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* 统计卡片样式 */
+.stats-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.stats-card h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.stats-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #1890ff;
+}
+
+.stats-card:nth-child(1) .stats-value {
+    color: #ff4d4f; /* 最高价 - 红色 */
+}
+
+.stats-card:nth-child(2) .stats-value {
+    color: #52c41a; /* 最低价 - 绿色 */
+}
+
+.stats-card:nth-child(3) .stats-value {
+    color: #1890ff; /* 平均价 - 蓝色 */
+}
+
+.stats-card:nth-child(4) .stats-value {
+    color: #faad14; /* 波动率 - 黄色 */
+}
+
+.stats-detail {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* 图表区域样式 */
+.chart-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+    box-shadow: var(--card-shadow);
+}
+
+.chart-section h2 {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.3rem;
+    color: var(--text-color);
+}
+
+.chart-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+
+/* 控制面板样式 */
+.control-panel {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+    box-shadow: var(--card-shadow);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.form-group select,
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background: white;
+    font-size: 0.9rem;
+}
+
+.form-group select[multiple] {
+    height: 120px;
+}
+
+.control-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.update-btn,
+.download-btn,
+.demo-data-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.update-btn {
+    background-color: #1890ff;
+    color: white;
+}
+
+.update-btn:hover {
+    background-color: #40a9ff;
+}
+
+.download-btn {
+    background-color: #52c41a;
+    color: white;
+}
+
+.download-btn:hover {
+    background-color: #73d13d;
+}
+
+.demo-data-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.demo-data-btn:hover {
+    background-color: #45a049;
+}
+
+.demo-data-btn i {
+    font-size: 1rem;
+}
+
+/* 对比表格样式优化 */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.comparison-table th {
+    font-weight: 600;
+    background: #f5f7fa;
+    color: var(--text-color);
+}
+
+.comparison-table td {
+    color: #666;
+}
+
+.comparison-table tr:last-child td {
+    border-bottom: none;
+}
+
+.group-header {
+    background: #f0f5ff;
+    color: #1890ff;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* 通知容器 */
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+}
+
+.notification {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    width: 300px;
+    position: relative;
+    animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.notification h4 {
+    margin: 0 0 0.5rem 0;
+    color: #1890ff;
+    font-size: 1rem;
+}
+
+.notification p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .analysis-container {
+        grid-template-columns: 1fr;
+    }
+
+    .control-buttons {
+        flex-direction: column;
+    }
+
+    .control-buttons button {
+        width: 100%;
+    }
+
+    .chart-container {
+        height: 300px;
+    }
+
+    .notification {
+        width: calc(100% - 40px);
+        max-width: 400px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .chart-container {
+        height: 500px;
+    }
+
+    #analysisChart {
+        max-height: 500px;
+    }
+}
+
+/* 确保图表容器不会闪烁和溢出 */
+#analysisChart {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 400px;
+}
+
+/* 空数据状态样式 */
+.empty-state-cell {
+    text-align: center;
+    padding: 2rem !important;
+    color: #999;
+    font-style: italic;
+}
+
+/* 响应式调整 */
+@media (max-width: 992px) {
+    .analysis-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .analysis-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .control-buttons {
+        flex-direction: column;
+    }
+    
+    .comparison-table {
+        display: block;
+        overflow-x: auto;
+    }
+} 

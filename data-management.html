@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据录入 - 在线粮油价格统计</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/data-management.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>数据录入</h1>
+            <nav>
+                <a href="index.html">首页</a>
+                <a href="data-management.html" class="active">数据录入</a>
+                <a href="price-analysis.html">价格情况分析</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- 批量数据上传区域 -->
+            <section class="upload-section">
+                <h2>批量数据上传</h2>
+                <div class="upload-area" id="dropZone">
+                    <div class="upload-content">
+                        <div class="upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <p>点击或拖拽Excel文件到此处上传</p>
+                        <p class="upload-hint">支持 .xlsx, .xls 格式</p>
+                        <button class="select-file-btn" id="selectFileBtn">选择文件</button>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h4>Excel文件必须包含以下列：</h4>
+                    <ul>
+                        <li>年份</li>
+                        <li>区县</li>
+                        <li>类别</li>
+                        <li>品牌</li>
+                        <li>单价(元/kg)</li>
+                    </ul>
+                </div>
+                <div class="action-buttons" id="actionButtons">
+                    <button class="reupload-btn" id="reuploadBtn">重新上传</button>
+                    <button class="clear-data-btn" id="clearDataBtn">清除历史数据</button>
+                </div>
+            </section>
+
+            <!-- 数据录入表单 -->
+            <section class="data-entry-section">
+                <h2>手动数据录入</h2>
+                <form id="dataEntryForm" class="data-entry-form">
+                    <div class="form-group">
+                        <label for="year">年份</label>
+                        <select id="year" name="year" required>
+                            <script>
+                                const currentYear = new Date().getFullYear();
+                                for(let i = 0; i < 10; i++) {
+                                    document.write(`<option value="${currentYear-i}">${currentYear-i}年</option>`);
+                                }
+                            </script>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="district">区县</label>
+                        <input type="text" id="district" name="district" required placeholder="请输入区县名称">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">类别</label>
+                        <select id="category" name="category" required>
+                            <option value="">请选择类别</option>
+                            <option value="大米">大米</option>
+                            <option value="面粉">面粉</option>
+                            <option value="食用油">食用油</option>
+                            <option value="其他">其他</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="otherCategoryGroup" style="display: none;">
+                        <label for="otherCategory">其他类别名称</label>
+                        <input type="text" id="otherCategory" name="otherCategory" placeholder="请输入类别名称">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="brand">品牌</label>
+                        <input type="text" id="brand" name="brand" required placeholder="请输入品牌名称">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price">单价 (元/kg)</label>
+                        <input type="number" id="price" name="price" step="0.01" required placeholder="请输入单价">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">备注</label>
+                        <textarea id="notes" name="notes" placeholder="可选填写备注信息"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="primary-btn">保存数据</button>
+                        <button type="reset" class="secondary-btn">重置</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- 数据列表 -->
+            <section class="data-list-section">
+                <div class="data-list-header">
+                    <h2>数据列表</h2>
+                    <div class="data-controls">
+                        <input type="text" id="searchInput" placeholder="搜索数据...">
+                        <select id="filterYear">
+                            <option value="">全部年份</option>
+                        </select>
+                        <select id="filterCategory">
+                            <option value="">全部类别</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>年份</th>
+                                <th>区县</th>
+                                <th>类别</th>
+                                <th>品牌</th>
+                                <th>单价(元/kg)</th>
+                                <th>备注</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 通知容器 -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="js/data-management.js"></script>
+</body>
+</html> 

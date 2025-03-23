@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线粮油价格统计</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Chart.js图表库 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- 引入SheetJS用于Excel处理 -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <!-- 加载示例数据 -->
+    <script src="sample_data/demo_data.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>在线粮油价格统计</h1>
+            <nav>
+                <a href="index.html" class="active">首页</a>
+                <a href="data-management.html">数据录入</a>
+                <a href="price-analysis.html">价格情况分析</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- 价格概览区域 -->
+            <section class="price-overview">
+                <div class="filter-bar">
+                    <select id="categoryFilter" class="category-select">
+                        <option value="">全部类别</option>
+                    </select>
+                    <input type="text" id="searchInput" placeholder="搜索数据..." class="search-input">
+                    <button id="loadDemoDataBtn" class="demo-data-btn" title="加载演示数据">
+                        <i class="fas fa-database"></i> 加载演示数据
+                    </button>
+                </div>
+                <div id="priceGrid" class="price-grid"></div>
+            </section>
+
+            <!-- 价格趋势图表 -->
+            <section class="price-trend">
+                <div class="chart-header">
+                    <h2>价格趋势</h2>
+                    <select id="chartPeriod" class="period-select">
+                        <option value="last3">近三年</option>
+                        <option value="365">近1年</option>
+                        <option value="90">近90天</option>
+                        <option value="30">近30天</option>
+                        <option value="7">近7天</option>
+                    </select>
+                </div>
+                <div class="chart-container">
+                    <canvas id="priceChart"></canvas>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 通知组件 -->
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 在线粮油价格统计. 版权所有.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // 加载演示数据按钮事件
+        document.getElementById('loadDemoDataBtn').addEventListener('click', function() {
+            const count = loadDemoData();
+            showNotification('演示数据加载成功', `已加载 ${count} 条粮油价格数据`);
+            
+            // 更新页面
+            updateCategoryFilter();
+            updatePriceCards();
+            initializeChart();
+        });
+    </script>
+</body>
+</html> 
