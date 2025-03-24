@@ -1,16 +1,14 @@
 {
   "version": 2,
-  "builds": [
+  "buildCommand": false,
+  "outputDirectory": ".",
+  "devCommand": false,
+  "installCommand": false,
+  "framework": null,
+  "rewrites": [
     {
-      "src": "**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1",
-      "continue": true
+      "source": "/(.*)",
+      "destination": "/$1"
     }
   ]
 } 
