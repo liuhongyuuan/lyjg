@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "public": true,
   "builds": [
     {
       "src": "**",
@@ -8,7 +9,10 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "handle": "filesystem"
+    },
+    {
+      "src": "/.*",
       "dest": "/index.html"
     }
   ],
